@@ -1,0 +1,16 @@
+markdown: kramdown
+theme: minima
+title: hogehoge
+lang: ja
+author:
+  name: teramako
+  email: terama@gmail.com
+description: >-
+  メモ置き場。
+
+minima:
+  date_format: "%Y-%m-%d"
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
