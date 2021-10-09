@@ -1,2 +1,4 @@
-# teramako.github.io
+---
+title: README
+---
 メモ置き場
