@@ -1,0 +1,14 @@
+---
+title: Tags
+layout: page
+---
+
+{%- for tag in site.tags -%}
+<h2>{{ tag[0] }}</h2>
+<ul>
+{% for post in tag[1] -%}
+  <li><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></li>
+{% endfor -%}
+</ul>
+{%- endfor -%}
+
