@@ -1,8 +1,7 @@
 ---
 title: Ansible keywords
-date: 2021-10-11 22:50:00
-tags:
-  - ansible
+date: 2021-10-11 22:50:00+09:00
+tags: ansible
 ---
 
 [Playbook Keywords][playbook_keywords] がちょっと分かり難いので表にまとめてみた。
