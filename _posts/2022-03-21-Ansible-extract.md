@@ -1,7 +1,7 @@
 ---
 title: Ansible extractフィルターを完全に理解した
 date: 2022-03-21 23:40:00+09:00
-tags: Ansible
+tags: ansible
 ---
 
 Ansible のフィルターに `extract` がある。
