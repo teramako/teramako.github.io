@@ -13,8 +13,14 @@ h1, h2, h3, h4, h5, h6 {
   font-family: serif;
 }
 
-h2::before { content: "## "}
-h3::before { content: "### "}
-h4::before { content: "#### "}
-h5::before { content: "##### "}
-h6::before { content: "###### "}
+.post-content h2::before { content: "## "}
+.post-content h2 {
+  border-bottom: double gray;
+}
+.post-content h3::before { content: "### "}
+.post-content h3 {
+  border-bottom: thin solid silver;
+}
+.post-content h4::before { content: "#### "}
+.post-content h5::before { content: "##### "}
+.post-content h6::before { content: "###### "}
