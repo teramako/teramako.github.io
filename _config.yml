@@ -1,4 +1,7 @@
-markdown: kramdown
+markdown: CommonMarkGhPages
+commonmark:
+  options: ["FOOTNOTES"]
+  extensions: ["strikethrough", "autolink", "table"]
 theme: minima
 title: hogehoge
 lang: ja
