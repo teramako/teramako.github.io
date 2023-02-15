@@ -24,3 +24,10 @@ h1, h2, h3, h4, h5, h6 {
 .post-content h4::before { content: "#### "}
 .post-content h5::before { content: "##### "}
 .post-content h6::before { content: "###### "}
+
+/*
+ * Don't set background in Mermaid diagrams
+ */
+pre:has(>.language-mermaid), code.language-mermaid {
+  background-color: transparent;
+}
