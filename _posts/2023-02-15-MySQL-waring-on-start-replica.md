@@ -1,6 +1,7 @@
 ---
 title: MySQL start replica 時に出る "Sending passwords in plain text without SSL/TLS is extremely insecure."
 date: 2023-02-16 01:00:00+09:00
+modified_date: 2023-02-16 01:50:00+09:00
 tags: MySQL
 mermaid: true
 ---
@@ -17,7 +18,7 @@ root@localhost[mysql-replica]> change master to master_host = 'source.host',
 -> master_port = 3306, master_ssl = 1, master_tls_version = 'TLSv1.2,TLSv1.3';
 Query OK, 0 rows affected (0.01 sec)
 
-root@localhost[mysql-replica]> start replica user = 'xxx' password = 'xxxx';
+root@localhost[mysql-replica]> start slave user = 'xxx' password = 'xxxx';
 Query OK, 0 rows affected, 1 warning (0.07 sec)
 
 root@localhost[mysql-replica]> show warnings;
@@ -44,11 +45,10 @@ root@localhost[mysql-source]> select conn_id,user,command,state,ssl_version,ssl_
 ```
 
 以後、以下の<dfn>source</dfn>,<dfn>replica</dfn>でそれぞれのサーバーをを指すこととする
-<dl>
-<dt>source</dt><dd>source(master)側となるDBサーバー</dd>
-<dt>replica</dt><dd>replica(slave)側となるDB側サーバー</dd>
-<dt>client</dt><dd>replicaへ接続するMySQLクライアント(サーバーとしては<dfn>replica</dfn>と同じ)</dd>
-</dl>
+
+- <dfn>source</dfn>: source(master)側となるDBサーバー
+- <dfn>replica</dfn>: replica(slave)側となるDB側サーバー
+- <dfn>client</dfn>: replicaへ接続するMySQLクライアント(サーバーとしては<dfn>replica</dfn>と同じ)
 
 ## 結論
 当初、 <dfn>replica</dfn> <--> <dfn>source</dfn> 間の通信の問題を疑っていた。
