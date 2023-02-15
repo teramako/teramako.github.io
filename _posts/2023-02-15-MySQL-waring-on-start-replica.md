@@ -98,7 +98,7 @@ user@replica$ mysql -u root -p -h localhost --protocol=tcp --ssl-mode=REQUIRED
 まずは、わざと平文通信にしてどんな通信をしているか見てみる。
 `change master to master_ssl = 0;` で平文通信にして、`start slave ...`をした。
 
-![平文通信している様をWiresharkで見たキャプチャ画像](../img//2023-02-15/replication_non_tls_2023-02-13_113205.png)
+![平文通信している様をWiresharkで見たキャプチャ画像](/img//2023-02-15/replication_non_tls_2023-02-13_113205.png)
 
 1. <dfn>replica</dfn>から、`ACK`
 1. <dfn>source</dfn>から、`Server Greeting` なるレスポンス
@@ -109,7 +109,7 @@ user@replica$ mysql -u root -p -h localhost --protocol=tcp --ssl-mode=REQUIRED
 ### TLSv1.2 接続設定時
 `change master to master_ssl = 1;` でTLS通信を有効化して、`start slave ...`をした。
 
-![TLS通信している様をWiresharkで見たキャプチャ画像](../img/2023-02-15/replication_tls12_2023-02-13_113344.png)
+![TLS通信している様をWiresharkで見たキャプチャ画像](/img/2023-02-15/replication_tls12_2023-02-13_113344.png)
 
 1. <dfn>replica</dfn>から、`ACK`
 1. <dfn>source</dfn>から、`Server Greeting` なるレスポンス
