@@ -1,2 +1,2 @@
-Sitemap: https://teramako.github.io/sitemap.txt
+Sitemap: https://teramako.github.io/sitemap.xml
 
