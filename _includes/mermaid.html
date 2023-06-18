@@ -1,14 +1,7 @@
 {% if page.mermaid == true %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js"></script>
-<script>
-var config = {
-    startOnLoad: true,
-    flowchart: {
-        useMaxWidth: false,
-        htmlLabels: true
-    }
-};
-mermaid.initialize(config);
-window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+    mermaid.run({ querySelector: '.language-mermaid'});
 </script>
 {% endif %}
