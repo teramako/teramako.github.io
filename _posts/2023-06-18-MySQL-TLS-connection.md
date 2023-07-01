@@ -1,6 +1,7 @@
 ---
 title: MySQL TLS(SSL)通信をする
 date: 2023-06-18
+modified_date: 2023-07-02 01:54:00+09:00
 tags: MySQL
 mermaid: true
 ---
@@ -85,14 +86,15 @@ MySQLの暗号化通信として、`openssl` コマンドで証明書を作る�
     - 一応、`keyUsage`や`extendedKeyUsage`でサーバー証明書の用途であることを明示しておく。
 4. サーバー証明書作成
     ```console
-    $ openssl x509 -req -days $((365*10)) -CA ca.pem -CAkey ca-key.pem -CAcreateserial -in server.csr -extfile server.csx -out server-cert.pem
+    $ openssl x509 -req -days $((365*10)) -CA ca.pem -CAkey ca-key.pem -in server.csr -extfile server.csx -out server-cert.pem
     Signature ok
     subject=/C=JP/ST=Tokyo/O=teramako/CN=MySQL Server Certificate
     Getting CA Private Key
     ```
-    - 初回なので、`-CAcreateserial` オプションを指定してテキトウなシリアル番号の生成と付与を行う
-        - CA証明書に `ca.pem` を指定しているので、同ディレクトリに `ca.srl` ファイルが作成される。
-        - 以降、CA証明書を使用して新たな証明書を作成する場合は、`-CAserial ca.srl` オプションでシリアル番号が入ったファイルを指定すると良い。
+    - ~~初回なので、`-CAcreateserial` オプションを指定してテキトウなシリアル番号の生成と付与を行う~~
+        - ~~CA証明書に `ca.pem` を指定しているので、同ディレクトリに `ca.srl` ファイルが作成される。~~
+        - ~~以降、CA証明書を使用して新たな証明書を作成する場合は、`-CAserial ca.srl` オプションでシリアル番号が入ったファイルを指定すると良い。~~
+        - (追記) マニュアルをよく読んだら指定せずにランダムな値で生成させた方が良いと書かれていたので取り消し。
 5. 確認
     ```console
     $ openssl x509 -text -noout -in server-cert.pem
@@ -149,7 +151,7 @@ MySQLの暗号化通信として、`openssl` コマンドで証明書を作る�
     - 一応、`keyUsage`や`extendedKeyUsage`でクライアント証明書の用途であることを明示しておく。
 4. 証明書作成
     ```console
-    $ openssl x509 -req -days $((365*10)) -in client.csr -CA ca.pem -CAkey ca-key.pem -CAserial ca.srl -out client-cert.pem
+    $ openssl x509 -req -days $((365*10)) -in client.csr -CA ca.pem -CAkey ca-key.pem -extfile client.csx -out client-cert.pem
     Signature ok
     subject=/C=JP/ST=Tokyo/CN=MySQL Client Certificate
     Getting CA Private Key
