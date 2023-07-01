@@ -33,9 +33,19 @@ MySQLの暗号化通信として、`openssl` コマンドで証明書を作る�
     ```
     - `-subj` に指定するSubject値は、MySQLユーザーのSSL設定の`REQUIRE ISSUER ...`に影響してくる。
       指定したい場合はメモっておくと良い。
-3. CA証明書作成
+3. CA用X509v3拡張ファイル作成
+    ```bash
+    cat <<EOF > ca.csx
+    basicConstraints = critical, CA:TRUE
+    keyUsage = cRLSign, keyCertSign
+    subjectKeyIdentifier = hash
+    authorityKeyIdentifier = keyid:always, issuer
+    EOF
+    ```
+    - 各項目の意味は `man x509v3_config` でmanマニュアルを見るか、 [x509v3_config] を見ると良い。
+4. CA証明書作成
     ```console
-    $ openssl x509 -req -days $((365 * 10)) -signkey ca-key.pem -in ca.csr -out ca.pem
+    $ openssl x509 -req -days $((365 * 10)) -signkey ca-key.pem -in ca.csr -extfile ca.csx -out ca.pem
     Signature ok
     subject=/CN=MySQL CA
     Getting Private key
@@ -58,18 +68,21 @@ MySQLの暗号化通信として、`openssl` コマンドで証明書を作る�
     $ openssl req -new -key server-key.pem -subj "/C=JP/ST=Tokyo/O=teramako/CN=MySQL Server Certificate" -nodes -out server.csr
     ```
     - Subjectの<ruby>CN<rp>(</rp><rt>Common Name</rt><rp>)</rp></ruby>には、サーバーのホスト名を入れると良いが、後続の<ruby>SAN<rp>(</rp><rt>Subject Alternative Name</rt><rp>)</rp></ruby>で設定するのでテキトウに
-3. <ruby>SAN<rp>(</rp><rt>Subject Alternative Name</rt><rp>)</rp></ruby>設定用のファイル作成
-    ```console
-    $ echo 'subjectAltName = DNS:localhost, IP:127.0.0.1, DNS:mysql-source, IP:172.28.0.2' > server.csx
-    $ sed 's/,/\n/g' server.csx
-    subjectAltName = DNS:localhost
-     IP:127.0.0.1
-     DNS:mysql-source
-     IP:172.28.0.2
+3. サーバー用X509v3拡張ファイル作成
+    ```bash
+    cat <<EOF > server.csx
+    basicConstraints = CA:FALSE
+    keyUsage = digitalSignature, keyEncipherment
+    extendedKeyUsage = serverAuth
+    subjectKeyIdentifier = hash
+    authorityKeyIdentifier = keyid, issuer
+    subjectAltName = DNS:localhost, IP:127.0.0.1, DNS:mysql-source, IP:172.28.0.2
+    EOF
     ```
-    - サーバーのホスト名やIPアドレスを入れておく
-    - ローカルホストからも使用できるように `localhost` や `127.0.0.1` を入れておくと良い
-    - 複数サーバー（更新用と参照用(replica)など）の場合は、このSAN値を変えて証明書を作成していくと、同CA証明書ファイルでそれぞれにアクセスできる(はず)
+    - <ruby>SAN<rp>(</rp><rt>Subject Alternative Name</rt><rp>)</rp></ruby>となる`subjectAltNameには、クライアントから接続先として使用されるであろうホスト名やIPアドレスを入れておく
+        - ローカルホストからも使用できるように `localhost` や `127.0.0.1` を入れておくと良い
+        - 複数サーバー（更新用と参照用(replica)など）の場合は、このSAN値を変えて証明書を作成していくと、同CA証明書ファイルでそれぞれにアクセスできる(はず)
+    - 一応、`keyUsage`や`extendedKeyUsage`でサーバー証明書の用途であることを明示しておく。
 4. サーバー証明書作成
     ```console
     $ openssl x509 -req -days $((365*10)) -CA ca.pem -CAkey ca-key.pem -CAcreateserial -in server.csr -extfile server.csx -out server-cert.pem
@@ -123,7 +136,18 @@ MySQLの暗号化通信として、`openssl` コマンドで証明書を作る�
     ```
     - `-subj` のSubjectはMySQLユーザーのSSL設定の`REQUIRE SUBJECT ...`に影響してくる。
       使用したい場合は、メモっておくと良い。
-3. 証明書作成
+3. クライアント用X509v3拡張ファイル作成
+    ```bash
+    cat <<EOF > client.csx
+    basicConstraints = CA:FALSE
+    keyUsage = digitalSignature, keyAgreement
+    extendedKeyUsage = clientAuth
+    subjectKeyIdentifier = hash
+    authorityKeyIdentifier = keyid, issuer
+    EOF
+    ```
+    - 一応、`keyUsage`や`extendedKeyUsage`でクライアント証明書の用途であることを明示しておく。
+4. 証明書作成
     ```console
     $ openssl x509 -req -days $((365*10)) -in client.csr -CA ca.pem -CAkey ca-key.pem -CAserial ca.srl -out client-cert.pem
     Signature ok
@@ -193,4 +217,5 @@ mysql@server> select s1.conn_id,s1.user,s1.db,s1.command,s1.state,s1.time,s2.* f
 ```
 
 
+[x509v3_config]: https://www.openssl.org/docs/manmaster/man5/x509v3_config.html
 [mysql_ssl_rsa_setup]: https://dev.mysql.com/doc/refman/8.0/en/mysql-ssl-rsa-setup.html "MySQL :: MySQL 8.0 Reference Manual :: 4.4.3 mysql_ssl_rsa_setup — Create SSL/RSA Files"
