@@ -27,7 +27,7 @@ MySQLの暗号化通信として、`openssl` コマンドで証明書を作る�
     ..................+++
     e is 65537 (0x10001)
     ```
-2. <ruby>CSR<rp>(</rp><rt>証明書 署名リクエスト</rt><rp>)</rp</ruby>(Certificate Signing Request)作成
+2. <ruby>CSR<rp>(</rp><rt>証明書 署名リクエスト</rt><rp>)</rp></ruby>(Certificate Signing Request)作成
     ```console
     $ openssl req -new -out ca.csr -key ca-key.pem -subj "/CN=MySQL CA" -nodes -out ca.csr
     ```
