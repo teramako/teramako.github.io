@@ -1,6 +1,7 @@
 ---
 title: PowerShell v5.1 (Desktop) で JSON デシリアライズする
-date: 2023-09-23
+date: 2023-09-23 18:30:00+09:00
+modified_date: 2023-09-23 18:37:00+09:00
 tags: PowerShell
 mermaid: true
 ---
@@ -98,7 +99,7 @@ Core v7には `ConvertFrom-Json -AsHashtable` があるため、上記を使う�
 エラーになってしまう。
 代わりに、[JsonConvert Class](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonConvert.htm) があるようだ。
 
-ともかく、Desktop Edition, Core Edition 両方で使用したい場合は、条件分岐を入れておいた方が。良さそう。
+ともかく、Desktop Edition, Core Edition 両方で使用したい場合は、条件分岐を入れておいた方が良さそう。
 ```powershell
 if ($PSEdition -eq "Desktop") {
     # Windows Desktop Edition
