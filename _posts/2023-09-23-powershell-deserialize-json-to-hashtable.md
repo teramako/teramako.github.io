@@ -1,7 +1,7 @@
 ---
 title: PowerShell v5.1 (Desktop) で JSON デシリアライズする
 date: 2023-09-23 18:30:00+09:00
-modified_date: 2023-09-23 18:37:00+09:00
+modified_date: 2023-09-26 22:15:00+09:00
 tags: PowerShell
 mermaid: true
 ---
@@ -60,7 +60,7 @@ function ConvertFrom-Dictionary ([IDictionary] $dict) {
     $resultHash = [ordered]@{}
     foreach ($entry in $dict.GetEnumerator()) {
         if ($entry.Value -is [array]) {
-            $resultHash.Add($entry.Key, (ConvertFrom-Array $entry.Value))
+            $resultHash.Add($entry.Key, [array](ConvertFrom-Array $entry.Value))
         } elseif ($entry.Value -is [IDictionary]) {
             $resultHash.Add($entry.Key, (ConvertFrom-Dictionary $entry.Value))
         } else {
@@ -75,7 +75,7 @@ function ConvertFrom-Array ([array] $array) {
     for ($index = 0; $index -lt $length; $index++) {
         $item = $array[$index]
         if ($item -is [array]) {
-            $resultArray[$index] = ConvertFrom-Array $item
+            $resultArray[$index] = [array](ConvertFrom-Array $item)
         } elseif ($item -is [IDictionary]) {
             $resultArray[$index] = ConvertFrom-Dictionary $item
         } else {
@@ -87,7 +87,7 @@ function ConvertFrom-Array ([array] $array) {
 
 $obj = $JsonSerializer.DeserializeObject($str.ToString())
 if ($obj -is [array]) {
-    return ConvertFrom-Array $obj
+    return [array](ConvertFrom-Array $obj)
 } elseif ($obj -is [IDictionary]) {
     return ConvertFrom-Dictionary $obj
 }
