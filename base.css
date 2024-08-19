@@ -1,6 +1,8 @@
 @charset "utf-8";
 body {
-  padding: 0 20%;
+  padding: 0 5%;
+  max-width: 1200px;
+  min-width: 800px;
 }
 .site-header, main, .site-footer {
   width: 100%;
@@ -9,8 +11,16 @@ body {
 main {
   flex: 1;
 }
+.post-content {
+  font-size: 12pt;
+  line-height: 1.8;
+}
 h1, h2, h3, h4, h5, h6 {
   font-family: serif;
+  font-weight: bold;
+}
+.post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
+  margin: 2em auto 0.5em;
 }
 
 .post-content h2::before { content: "## "}
@@ -24,6 +34,39 @@ h1, h2, h3, h4, h5, h6 {
 .post-content h4::before { content: "#### "}
 .post-content h5::before { content: "##### "}
 .post-content h6::before { content: "###### "}
+
+.post-content pre {
+  font-size: 10pt;
+}
+
+.post-content code {
+  font-size: inherit;
+  border: none;
+  padding: 1px 2px;
+  background-color: #f2f2f2;
+}
+.post-content blockquote {
+  font-size: 11pt;
+  font-style: normal;
+  color: unset;
+  border-left: 0.5em solid steelblue;
+  padding-left: 0.5em;
+  margin-left: 1em;
+}
+
+.post-content a[href^="http"]::after {
+  content: "🔗"; font-size: smaller;
+}
+
+.highlighter-rouge .highlight, pre {
+  background-color: #f2f2f2;
+  line-height: 1.2;
+}
+
+img[alt] {
+  margin: 10px 0 0 10px;
+  box-shadow: 3px 3px 3px 2px silver;
+}
 
 /*
  * Don't set background in Mermaid diagrams
