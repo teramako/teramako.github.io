@@ -65,6 +65,7 @@ nav.toc > ol::before, nav.toc > ul::before {
   border: none;
   padding: 1px 2px;
   background-color: #f2f2f2;
+  text-wrap: initial;
 }
 .post-content blockquote {
   font-size: 0.9rem;
