@@ -1,36 +1,37 @@
 @charset "utf-8";
+
 body {
-  padding: 0 5%;
-  max-width: 1200px;
-  min-width: 800px;
+  min-width: 350px;
+  padding: 0 8px;
+  margin: auto;
+  -webkit-text-size-adjust: unset;
+  flex-wrap: wrap;
 }
+
 .site-header, main, .site-footer {
-  width: 100%;
   padding: 0 8px;
 }
 main {
   flex: 1;
 }
 .post-content {
-  font-size: 12pt;
   line-height: 1.8;
+  overflow-wrap: anywhere;
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: serif;
   font-weight: bold;
+  line-height: 1.2;
 }
 nav.toc {
-  float: right;
-  min-width: 400px;
-  max-width: 50%;
-  padding: 0.5em;
+  min-width: 300px;
+  padding: 0.5rem;
   background-color: whitesmoke;
-  margin-left: 1em;
+  margin: 1rem;
 }
 nav.toc > ul, nav.toc > ol {
   background-color: #fdfdfd;
-  list-style-position: inside;
-  padding: 0 1em;
+  padding: 0 1rem 0 2rem;
   margin: 0;
 }
 nav.toc > ol::before, nav.toc > ul::before {
@@ -56,7 +57,7 @@ nav.toc > ol::before, nav.toc > ul::before {
 .post-content h6::before { content: "###### "}
 
 .post-content pre {
-  font-size: 10pt;
+  font-size: 0.9rem;
 }
 
 .post-content code {
@@ -66,7 +67,7 @@ nav.toc > ol::before, nav.toc > ul::before {
   background-color: #f2f2f2;
 }
 .post-content blockquote {
-  font-size: 11pt;
+  font-size: 0.9rem;
   font-style: normal;
   color: unset;
   border-left: 0.5em solid steelblue;
@@ -75,11 +76,12 @@ nav.toc > ol::before, nav.toc > ul::before {
 }
 
 .post-content a[href^="http"]::after {
-  content: "🔗"; font-size: smaller;
+  content: "🔗"; font-size: 0.8rem;
 }
 
 .post-content hr {
   margin: 3em 0;
+  border: none;
   border-top: 0.5em dashed black;
 }
 
@@ -88,8 +90,11 @@ nav.toc > ol::before, nav.toc > ul::before {
   line-height: 1.2;
 }
 
+img {
+  max-width: calc(100% - 4em);
+}
 img[alt] {
-  margin: 10px 0 0 10px;
+  margin: 1em;
   box-shadow: 3px 3px 3px 2px silver;
 }
 
@@ -98,4 +103,18 @@ img[alt] {
  */
 pre:has(>.language-mermaid), code.language-mermaid {
   background-color: transparent;
+}
+
+@media screen and (min-width: 1025px) {
+  body {
+    max-width: 1024px;
+    min-width: 600px;
+    padding: 0 5%;
+    margin: auto;
+  }
+  nav.toc {
+    float: right;
+    max-width: 400px;
+    margin: 0 0 0 1em;
+  }
 }
