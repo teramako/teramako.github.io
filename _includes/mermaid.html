@@ -1,5 +1,12 @@
 {% if page.mermaid == true %}
 <script type="module">
+    for (let code of document.querySelectorAll('.language-mermaid')) {
+        let data = code.textContent;
+        if (data.startsWith('>')) {
+            console.warn("mermaid.js code is detected.", "strip '>'");
+            code.textContent = data.substring(1);
+        }
+    }
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
     mermaid.initialize({ startOnLoad: true });
     mermaid.run({ querySelector: '.language-mermaid'});
