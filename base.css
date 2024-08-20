@@ -78,6 +78,11 @@ nav.toc > ol::before, nav.toc > ul::before {
   content: "🔗"; font-size: smaller;
 }
 
+.post-content hr {
+  margin: 3em 0;
+  border-top: 0.5em dashed black;
+}
+
 .highlighter-rouge .highlight, pre {
   background-color: #f2f2f2;
   line-height: 1.2;
