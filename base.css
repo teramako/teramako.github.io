@@ -19,6 +19,26 @@ h1, h2, h3, h4, h5, h6 {
   font-family: serif;
   font-weight: bold;
 }
+nav.toc {
+  float: right;
+  min-width: 400px;
+  max-width: 50%;
+  padding: 0.5em;
+  background-color: whitesmoke;
+  margin-left: 1em;
+}
+nav.toc > ul, nav.toc > ol {
+  background-color: #fdfdfd;
+  list-style-position: inside;
+  padding: 0 1em;
+  margin: 0;
+}
+nav.toc > ol::before, nav.toc > ul::before {
+  display: block;
+  content: "TOC";
+  text-align: center;
+}
+
 .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
   margin: 2em auto 0.5em;
 }
