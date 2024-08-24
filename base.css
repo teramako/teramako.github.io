@@ -6,7 +6,8 @@
   --font-body: Inter, var(--font-fallback);
   --font-heading: serif, Inter, var(--font-fallback);
   --font-code: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace, var(--font-emoji);
-  --code-bg-color: #F9F9F9;
+  --code-bg-color: #e9e9e9;
+  --pre-code-bg-color: #F9F9F9;
 }
 body {
   min-width: 350px;
@@ -31,7 +32,7 @@ main {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: bold;
-  line-height: 1.1;
+  line-height: 1.3;
   letter-spacing: -1px;
 }
 nav.toc {
@@ -73,7 +74,7 @@ nav.toc > ol::before, nav.toc > ul::before {
   font-family: var(--font-code);
 }
 
-.post-content code {
+code {
   font-size: inherit;
   font-family: var(--font-code);
   border: none;
@@ -100,8 +101,9 @@ nav.toc > ol::before, nav.toc > ul::before {
   border-top: 0.5em dashed black;
 }
 
-.highlighter-rouge .highlight, pre {
-  background-color: var(--code-bg-color);
+.highlighter-rouge .highlight, pre,
+pre > code {
+  background-color: var(--pre-code-bg-color);
   line-height: 1.2;
 }
 
