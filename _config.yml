@@ -1,6 +1,6 @@
 markdown: CommonMarkGhPages
 commonmark:
-  options: ["FOOTNOTES"]
+  options: ["FOOTNOTES", "UNSAFE"]
   extensions: ["strikethrough", "autolink", "table"]
 theme: minima
 title: hogehoge
