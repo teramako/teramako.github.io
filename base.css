@@ -106,13 +106,16 @@ pre > code {
   background-color: var(--pre-code-bg-color);
   line-height: 1.2;
 }
-
-img {
-  max-width: calc(100% - 4em);
+figure {
+  display: inline-flex;
+  flex-flow: column;
 }
-img[alt] {
-  margin: 1em;
+figure > img {
   box-shadow: 3px 3px 3px 2px silver;
+  max-width: 100%;
+}
+figcaption {
+  text-align: center;
 }
 
 /*
