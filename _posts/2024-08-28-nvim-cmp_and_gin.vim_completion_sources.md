@@ -1,6 +1,7 @@
 ---
 title: Neovim nvim-cmp の補完ソースプラグインと gin.vim の action 補完ソースを書いた話
 date: 2024-08-28
+modified_date: 2024-08-28 09:17:00+09:00
 tags: Vim
 toc: true
 ---
@@ -353,7 +354,7 @@ gin.vim 専用ということもあって情報量が多くなるためです。
 - [GitHub - vim-denops/denops.vim: 🐜 An ecosystem of Vim/Neovim which allows developers to write cross-platform plugins in Deno](https://github.com/vim-denops/denops.vim)
 - [GitHub - vim-denops/deno-denops-std: 📚 Standard module for denops.vim](https://github.com/vim-denops/deno-denops-std/)
 
-Deno は2年前ほどに [nyancat](https://github.com/teramako/nyancat.deno) を書いてみて遊んだ程度です。まぁだいだい JavaScript だし読むだけなら何とかるだろうと読み始めます。
+Deno は2年前ほどに [nyancat](https://github.com/teramako/nyancat.deno) を書いてみて遊んだ程度です。まぁだいだい JavaScript だし読むだけなら何とかなるだろうと読み始めます。
 
 ……ちょっと甘かったです。async/await の連続で、かつ、vim/neovim を動かすためのライブラリですので随所に Vim script も出てきます。
 Deno も TypeScript も Vim script も詳しくない僕には辛かったです。
@@ -948,7 +949,7 @@ cmp.setup.cmdline('@', { -- vim.fn.input() 時の補完
 >
 > _―― 試行錯誤中の呟きより_
 
-(上ののコードには誤りがあり、`getcmdcomptype()` ではなく `getcmdcomp**l**type()` が正解です)
+(上のコードには誤りがあり、`getcmdcomptype()` ではなく `getcmdcomp**l**type()` が正解です)
 
 > gin.vim のアクション一覧も出た。  
 > 勝てる！  
