@@ -1,0 +1,30 @@
+flowchart TD
+    ci{fa:fa-star CommandInfo}
+    md_help@{ shape: docs, label: fa:fa-file $command.md }
+    yaml_help@{ shape: docs, label: fa:fa-file $command.yml }
+    maml_xml@{ shape: doc, label: fa:fa-file $module-Help.xml }
+    md_mf@{ shape: doc, label: fa:fa-file $module.md }
+    yaml_fm@{ shape: doc, label: fa:fa-file $module.yml }
+
+    ch{fa:fa-star CommandHelp}
+    mfi{fa:fa-star ModuleInfo}
+
+    s@{ shape: circle, label: "Start" }
+    s -->|fa:fa-rocket Get-Command| ci
+    s -->|fa:fa-rocket Get-Module| ci
+
+    ci -->|fa:fa-rocket New-CommandHelp| ch
+    ci -->|fa:fa-rocket New-MarkdownCommandHelp| md_help
+    ch -->|fa:fa-rocket New-MarkdownModuleFile| md_mf
+    ch -->|fa:fa-rocket Export-MamlCommandHelp| maml_xml
+    maml_xml --> |fa:fa-rocket Import-MamlHelp| ch
+    ch -->|fa:fa-rocket Export-MarkdownCommandHelp| md_help
+    md_help --> |fa:fa-rocket Import-MarkdownCommandHelp| ch
+    ch -->|fa:fa-rocket Export-YamlCommandHelp| yaml_help
+    yaml_help --> |fa:fa-rocket Import-YamlCommandHelp| ch
+
+    mfi -->|fa:fa-rocket Export-MarkdownModuleFile| md_mf
+    md_mf --> |fa:fa-rocket Import-MarkdownModuleFile| mfi
+
+    mfi -->|fa:fa-rocket Export-YamlModuleFile| yaml_fm
+    yaml_fm --> |fa:fa-rocket Import-YamlModuleFile| mfi
