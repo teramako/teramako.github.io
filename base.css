@@ -127,7 +127,7 @@ pre:has(>.language-mermaid), code.language-mermaid {
 
 @media screen and (min-width: 1024px) {
   body {
-    max-width: 1600px;
+    max-width: 1024px;
     min-width: 600px;
     padding: 0 5%;
     margin: auto;
