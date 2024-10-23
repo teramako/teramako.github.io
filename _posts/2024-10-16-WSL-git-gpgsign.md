@@ -1,6 +1,7 @@
 ---
 title: WSL で git commit にGPG署名をする
 date: 2024-10-16 15:00:00+09:00
+modified_date: 2024-10-23 22:20:00+09:00
 tags: git
 toc: true
 ---
@@ -31,9 +32,9 @@ Windows というか WSL で使えるのがないか探したところ [diabloda
 1. テキトウなところに  
    `git clone https://github.com/diablodale/pinentry-wsl-ps1.git`
 2. 実行権限の付与  
-   `chmod ug=rx pinentry-wsl-ps1.sh`
+   `chmod ug=rx pinentry-wsl-ps1/pinentry-wsl-ps1.sh`
 3. パスが通ったところにシンボリックリンクを作成  
-   `ln -s pinentry-wsl-ps1.sh ~/bin/pinetry-wsl-ps1.sh`
+   `ln -s $PWD/pinentry-wsl-ps1/pinentry-wsl-ps1.sh ~/bin/pinentry-wsl-ps1.sh`
 4. Windows `powershell.exe` にもパスを通す  
    `ln -s /mnt/c/Windows/SysWOW64/WindowsPowerShell/v1.0/powershell.exe ~/bin/powershell.exe`
 
@@ -55,7 +56,7 @@ GUIのフォームが出てくることを確認。
 pinentry-program ~/bin/pinentry-wsl-ps1.sh
 ```
 
-あと、最後に `pkill gpg-agent` でGPGエージェントを停止させた。(本当に必要だったか不明)
+あと、最後に ~~`pkill gpg-agent`~~ `gpgconf --kill gpg-agent` でGPGエージェントを停止させた。(本当に必要だったか不明)
 
 [gin.vim]: https://github.com/lambdalisue/vim-gin "GitHub - lambdalisue/vim-gin: 🥃 Gin makes you drunk on Git"
 [pinentry]: https://www.gnupg.org/software/pinentry/index.html
