@@ -1,7 +1,7 @@
 ---
 title: WSL で git commit にGPG署名をする
 date: 2024-10-16 15:00:00+09:00
-modified_date: 2024-10-23 22:20:00+09:00
+modified_date: 2024-10-24 14:05:00+09:00
 tags: git
 toc: true
 ---
@@ -57,6 +57,20 @@ pinentry-program ~/bin/pinentry-wsl-ps1.sh
 ```
 
 あと、最後に ~~`pkill gpg-agent`~~ `gpgconf --kill gpg-agent` でGPGエージェントを停止させた。(本当に必要だったか不明)
+
+## systemd 使用時の設定 (2024-10-24 追記)
+
+諸事情によりsystemdを有効にしたところ、pinentry のプログラムがうまく動かなくなった。
+systemd経由で `gpg-agent` が動いているのが問題と思われたため、起動しないように変更。
+
+```console
+$ systemctl --user stop gpg-agent.service gpg-agent-browser.socket gpg-agent.socket gpg-agent-ssh.socket gpg-agent-extra.socket
+$ systemctl --user mask gpg-agent.service gpg-agent.socket gpg-agent-ssh.socket gpg-agent-extra.socket
+Created symlink /home/teramako/.config/systemd/user/gpg-agent.service → /dev/null.
+Created symlink /home/teramako/.config/systemd/user/gpg-agent.socket → /dev/null.
+Created symlink /home/teramako/.config/systemd/user/gpg-agent-ssh.socket → /dev/null.
+Created symlink /home/teramako/.config/systemd/user/gpg-agent-extra.socket → /dev/null.
+```
 
 [gin.vim]: https://github.com/lambdalisue/vim-gin "GitHub - lambdalisue/vim-gin: 🥃 Gin makes you drunk on Git"
 [pinentry]: https://www.gnupg.org/software/pinentry/index.html
