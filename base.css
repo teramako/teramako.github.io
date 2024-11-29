@@ -99,6 +99,7 @@ code {
   margin: 3em 0;
   border: none;
   border-top: 0.5em dashed black;
+  clear: both;
 }
 
 .highlighter-rouge .highlight, pre,
