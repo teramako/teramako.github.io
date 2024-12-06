@@ -5,6 +5,7 @@ commonmark:
 theme: minima
 title: hogehoge
 lang: ja
+timezone: Asia/Tokyo
 author:
   name: teramako
   email: terama@gmail.com
