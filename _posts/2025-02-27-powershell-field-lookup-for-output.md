@@ -96,7 +96,7 @@ https://github.com/PowerShell/PowerShell/blob/c64a636d9bdcae3d00aab551685d87b48c
 
 `name`, `id`, `key`, `*key`, `*name`, `*id` の順でプロパティ名を検索(Case-Insensitive, `*` はワイルドカード)して行き、最初に見つかったプロパティとなる。
 
-[問題.2](#問題.2) では、 `Name`, `Id` プロパティを持っていて、最初に見つかった `Name` プロパティを抽出しているわけだ。
+[問題.2](#section-2) では、 `Name`, `Id` プロパティを持っていて、最初に見つかった `Name` プロパティを抽出しているわけだ。
 
 ### 抽出プロパティの指定
 上記 C# コードを見ると、`knownPatterns` での検索の前に、さらに特定のプロパティ名を算出している。
