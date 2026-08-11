@@ -16,12 +16,11 @@ Powershell モジュールとして動くものができているので、ずい
 以前は "NativeCommandCompleter.psm" というド直球な名前だったが改名した。
 また、補完エンジンとなるコアのモジュールである [Sabamiso.psm] と、各コマンドの補完コードを集めた [Sabamiso.completions] に分離している。
 
-
-<img src="https://raw.githubusercontent.com/teramako/Sabamiso.psm/refs/heads/main/docs/imgs/Sabamiso_x512.png" width="400" align="right">
-
 ## [Sabamiso.psm]
 
 補完エンジンと補完コードの登録を行うコマンド群を提供するモジュールである。
+
+<img src="https://raw.githubusercontent.com/teramako/Sabamiso.psm/refs/heads/main/docs/imgs/Sabamiso_x512.png" width="256" align="right">
 
 大枠の仕組みは [PowerShell で外部コマンドの補完] に書いた時と変わっていない。
 
