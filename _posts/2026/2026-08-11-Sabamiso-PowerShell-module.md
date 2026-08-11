@@ -1,6 +1,7 @@
 ---
 title: Sabamiso.psm - PowerShell用外部コマンド補完モジュール
 date: 2026-08-11 19:00:00+09:00
+modified_date: 2026-08-11 20:30:00+09:00
 tags: PowerShell
 toc: true
 ---
@@ -45,7 +46,30 @@ Powershell モジュールとして動くものができているので、ずい
 
 bash, zsh, fish 等のUnix系シェルの `/usr/share/*/completions/`, `/etc/*/completions/` を真似していると言えば分かりやすいだろうか。
 
-補完発動時に動的に読むため、PowerShell起動時に各コマンド用の補完コードを読み込む必要がなくなり、起動時間が長くなる要因を削減できる。
+### 遅延読み込み
+上記のような仕組みで補完発動時に動的に読むため、PowerShell起動時に各コマンド用の補完コードを読み込む必要がなくなり、起動時間が長くなる要因を削減できる。
+
+また、後述するけれど `posh-git` のような既存の補完モジュールを再利用するかたちでの遅延読み込みも可能。
+
+### 補完候補出力(menu-complete)には、その説明文が表示される
+
+fish の補完で候補と共に説明が出てくるのが好きで、強くインスパイアしている。
+
+![Complete ls parameters](/img/2026-08-11/complete-ls-parameters.png)
+
+### Windows対応
+
+Windows コマンドで `/` 始まりのパラメーターも補完できる。
+
+![Complete whoami parameters](/img/2026-08-11/complete-whoami-on-windows.png)
+
+また、上図のようにロケールに合わせてローカライズされた説明文も出せるようになっている。
+
+### 特殊な形態のコマンド
+
+少し工夫が必要だが、 `dd` コマンドのような `-` から始まらないような特殊なパラメーターにも対応できる。
+![Complete dd parameters](/img/2026-08-11/complete-dd-parameters.png)
+
 
 ## [Sabamiso.completions]
 
